@@ -8,23 +8,25 @@ data = {
 }
 
 class Data:
-    id, name = "", ""
-
+    inLineDict = {}
     def get_all_keys(self, d):
         for key, value in d.items():
             yield key
             if isinstance(value, dict):
                 yield from self.get_all_keys(self, value)
-
+            else:
+                self.inLineDict[key] = value
     @classmethod
     def from_dict( cls, data):
-        
         for x in cls.get_all_keys(cls, data):
-            print(x)
+            pass
+        print(str(cls.inLineDict))
+        # for x in cls.get_all_keys(cls, data):
+        #     print(x)
             
         new_dict = cls()  # equivalent to `dict()`: creates a new dictionary instance
-        for key in data:
-            print(str(key))
+        # for key in data:
+        #     print(str(key))
         
         return new_dict
 
