@@ -8,6 +8,18 @@ data = {
 }
 
 class Data:
+    def __new__(cls, *args, **kwargs):
+        print("1. Create a new instance of Data.")
+        return super().__new__(cls)
+ 
+    def __init__(self):
+        print("2. Initialize the new instance of Data.")
+
+    def __init__(self, name):
+        print("2. Initialize the new instance of Data.")
+        self.name = name
+
+
     inLineDict = {}
     def get_all_keys(self, d):
         for key, value in d.items():
@@ -16,19 +28,21 @@ class Data:
                 yield from self.get_all_keys(self, value)
             else:
                 self.inLineDict[key] = value
+
     @classmethod
     def from_dict( cls, data):
         for x in cls.get_all_keys(cls, data):
             pass
-        print(str(cls.inLineDict))
+        locals().update(cls.inLineDict)
+        # print(str(cls.inLineDict))
         # for x in cls.get_all_keys(cls, data):
         #     print(x)
             
-        new_dict = cls()  # equivalent to `dict()`: creates a new dictionary instance
+        # new_dict = cls()  # equivalent to `dict()`: creates a new dictionary instance
         # for key in data:
         #     print(str(key))
         
-        return new_dict
+        # return new_dict
 
     def to_dict(self):
         ...
@@ -36,7 +50,6 @@ class Data:
 
 # load from dict
 my_inst_1 = Data.from_dict(data)
-print(str(my_inst_1))
 
 # load from inputs
 my_inst_2 = Data(name="my")
