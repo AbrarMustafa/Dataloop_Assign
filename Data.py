@@ -46,7 +46,7 @@ class Data:
 
     @classmethod
     def to_dict(cls):
-        return cls
+        return cls.main_data
   
 
 # load from dict
