@@ -1,24 +1,25 @@
+
+data = { 
+    "id": "1", "name": "first",
+    "metadata": {
+        "system": { "size": 10.7  },
+        "user": { "batch": 10 }
+    }
+}
+
 class Data:
     @classmethod
-    def from_dict(cls):
-        ...
+    def from_dict(cls, data):
+        # return cls
+        new_dict = cls()  # equivalent to `dict()`: creates a new dictionary instance
+        for key in data:
+            print(str(key))
+            # new_dict[key] = 1
+        return new_dict
 
     def to_dict(self):
         ...
-
-
-data = {
-    "id": "1",
-    "name": "first",
-    "metadata": {
-        "system": {
-            "size": 10.7
-        },
-        "user": {
-            "batch": 10
-        }
-    }
-}
+  
 
 # load from dict
 my_inst_1 = Data.from_dict(data)
