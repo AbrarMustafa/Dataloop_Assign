@@ -1,3 +1,4 @@
+import math
 
 data = { 
     "id": "1", "name": "first",
@@ -9,14 +10,15 @@ data = {
 
 class Data:
     def __new__(cls, *args, **kwargs):
-        print("1. Create a new instance of Data.")
+        # print("1. Create a new instance of Data.")
         return super().__new__(cls)
  
     def __init__(self):
-        print("2. Initialize the new instance of Data.")
+        pass
+        # print("2. Initialize the new instance of Data.")
 
     def __init__(self, name):
-        print("2. Initialize the new instance of Data.")
+        # print("2. Initialize the new instance of Data.")
         self.name = name
 
 
@@ -27,13 +29,18 @@ class Data:
             if isinstance(value, dict):
                 yield from self.get_all_keys(self, value)
             else:
-                self.inLineDict[key] = value
+                self.inLineDict[key] = math.floor(value) if isinstance(value, float) else value
 
     @classmethod
     def from_dict( cls, data):
         for x in cls.get_all_keys(cls, data):
             pass
-        locals().update(cls.inLineDict)
+
+        for k, v in cls.inLineDict.items():
+            setattr(cls, k, v)
+   
+        # locals().update(cls.inLineDict)
+        # print(str(cls.size))
         # print(str(cls.inLineDict))
         # for x in cls.get_all_keys(cls, data):
         #     print(x)
@@ -42,7 +49,7 @@ class Data:
         # for key in data:
         #     print(str(key))
         
-        # return new_dict
+        return cls
 
     def to_dict(self):
         ...
